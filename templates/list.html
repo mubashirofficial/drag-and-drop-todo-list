@@ -1,0 +1,18 @@
+<form class="sortable list-group" hx-trigger="end" hx-post="{% url 'sort' %}">
+                  {% csrf_token %}
+            <div class="htmx-indicator">Updating...</div>
+
+              {% for p in tasks %}
+                <div class="task">
+                <input type="hidden" name="task_order" value="{{ p.pk }}" />
+                    <a>
+                         {{p.order}} {{p.task }}
+                    </a>
+                    <span>
+                       <button type="submit" formaction="{% url 'delete-task' p.pk %}" style="background-color:#eb444f;">
+                           X
+                       </button></span>
+
+                </div>
+                  {% endfor %}
+        </form>
